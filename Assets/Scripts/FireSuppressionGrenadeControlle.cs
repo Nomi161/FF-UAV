@@ -29,6 +29,12 @@ public class FireSuppressionGrenadeControlle : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
-//        Destroy(gameObject);
+        Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log($"collision={collision.gameObject.name}");
+        Destroy(gameObject);
     }
 }

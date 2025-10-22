@@ -44,6 +44,7 @@ public class FlameController : MonoBehaviour
         //       flame.SetActive(false);
         flame.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
         ignition = true;      // 発火状態(false=未発火/true=発火)
+        Debug.Log("flame ignition");
     }
 
     // Update is called once per frame

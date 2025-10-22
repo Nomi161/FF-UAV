@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void UpdatePosition()
     {
+//        if (GameManager.isGusting) return;
+
         //// Rotation
         ////if (canRotate)
         ////{

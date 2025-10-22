@@ -25,11 +25,13 @@ public class CameraController : MonoBehaviour
 
         // プレイヤー情報の取得
         player = GameObject.FindGameObjectWithTag("Player");
+        // プレイヤーの位置を読みだす
         targetPos = player.transform.position;
         Debug.Log($"targetPos={targetPos}");
+
         // プレイヤーとカメラの距離感を記憶しておく
         diff = player.transform.position - transform.position;
-        targetPos.z -= 10;
+        targetPos.z += 100;
         transform.position = targetPos;
         transform.LookAt(player.transform);
         Debug.Log($"ownPos={transform.position}");
