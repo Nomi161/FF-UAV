@@ -40,7 +40,7 @@ public class Shooter : MonoBehaviour
             targetPoint = hit.point;
 
             // エイムポイントを表示する
-            Vector3 aimVecter3 = new Vector3(targetPoint.x, targetPoint.y, targetPoint.z -1.0f);
+            Vector3 aimVecter3 = new Vector3(targetPoint.x, targetPoint.y, targetPoint.z - 1.0f);
             aimPoint.SetActive(true);                           // オブジェクトをアクティブにする
             aimPoint.transform.position = aimVecter3;            // 当たった場所に移動させる
             aimPoint.transform.LookAt(Camera.main.transform);   // カメラの方向を向かせる
@@ -95,20 +95,24 @@ public class Shooter : MonoBehaviour
             {
                 Debug.Log("Shot()");
                 //        Transform gate = transform.Find("Gate");
-                // 消火弾を作成する
-                GameObject grenade = Instantiate(fsGrenade, gate.transform.position, Quaternion.identity); // 新しい回転を適用
-                //               Debug.Log("grenade");
-                // 弾のRigidbodyを読みだす
-                               Rigidbody grenadeRbody = grenade.GetComponent<Rigidbody>();
-                               grenadeRbody.useGravity = false;  // 光線兵器なら重力の影響をOFFにする
-                               grenadeRbody.position = gate.transform.position;
+                if (GameManager.grenadeRemainingNum > 0)
+                {
+                    // 消火弾を作成する
+                    GameObject grenade = Instantiate(fsGrenade, gate.transform.position, Quaternion.identity); // 新しい回転を適用
+                                                                                                               //               Debug.Log("grenade");
+                                                                                                               // 弾のRigidbodyを読みだす
+                    Rigidbody grenadeRbody = grenade.GetComponent<Rigidbody>();
+                    grenadeRbody.useGravity = false;  // 光線兵器なら重力の影響をOFFにする
+                    grenadeRbody.position = gate.transform.position;
 
-                // SEの再生
-                //           SEPlay(SEType.Shot);
+                    // SEの再生
+                    //           SEPlay(SEType.Shot);
 
-                                grenadeRbody.AddForce(gate.transform.forward * grenadeSpeed, ForceMode.Impulse);  // ゲートの正面から弾を撃ちだす
-                //                grenadeRbody.AddForce((gate.transform.position - gate.transform.position).normalized * grenadeSpeed, ForceMode.Impulse);  // プレイヤーに向けて弾を撃ちだす
-
+                    grenadeRbody.AddForce(gate.transform.forward * grenadeSpeed, ForceMode.Impulse);  // ゲートの正面から弾を撃ちだす
+                                                                                                      //                grenadeRbody.AddForce((gate.transform.position - gate.transform.position).normalized * grenadeSpeed, ForceMode.Impulse);  // プレイヤーに向けて弾を撃ちだす
+                    // 消火弾残数を更新する                                                                                                      // 消火弾残数を減らす
+                    GameManager.grenadeRemainingNum--;     // 消火弾残数
+                }
             }
             yield return null;
 

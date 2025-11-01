@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 /// <summary>
 /// プレイヤーコントローラー
@@ -7,9 +8,11 @@ public class PlayerController : MonoBehaviour
 {
     GameObject gate;    // 消火弾発射ゲート
     // 移動設定
-    [System.NonSerialized] public float moveSpeed = 100.0f;
-    [System.NonSerialized] public float rotationSpeed = 30f;
-    
+    [System.NonSerialized]
+    public float moveSpeed = 100.0f;
+    public float rotationSpeed = 30f;
+    [SerializeField]
+
     bool CanMove = true;
     int[] input = new int[6]; // Forward, Back, Left, Right, Up, Down
 
@@ -34,6 +37,19 @@ public class PlayerController : MonoBehaviour
         {
             UpdatePosition();
         }
+
+        // 高度の更新
+        //if (GameManager.atitude != transform.position.y)
+        //{
+            GameManager.atitude = transform.position.y;
+        //}
+
+// バッテリー残量の更新
+if (GameManager.batteryLevel > 0.0f)
+        {
+            GameManager.batteryLevel -= 0.1f;
+//            Debug.Log($"GameManager.batteryLevel={GameManager.batteryLevel}");
+        }
     }
 
     /// <summary>
@@ -50,7 +66,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void UpdatePosition()
     {
-//        if (GameManager.isGusting) return;
+        if (GameManager.isGusting) return;
 
         //// Rotation
         ////if (canRotate)
@@ -141,6 +157,7 @@ public class PlayerController : MonoBehaviour
             + input[1] * Vector3.back + input[3] * Vector3.right + input[5] * Vector3.down;
         AddPos = GetComponent<Rigidbody>().rotation * AddPos;
         GetComponent<Rigidbody>().linearVelocity = AddPos * (Time.fixedDeltaTime * curSpeed);
+
     }
 
 

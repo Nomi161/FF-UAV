@@ -7,8 +7,7 @@ using UnityEngine;
 public class FireSuppressionGrenadeControlle : MonoBehaviour
 {
     FLASH_STATE state = FLASH_STATE.None;   // 火炎の強度(初期値)
-    public GameObject flamePrefab;          // 炎のプレハブ
-    [System.NonSerialized] public float deleteTime = 5.0f;  // グレネードが削除されるまでの時間
+     [System.NonSerialized] public float deleteTime = 5.0f;  // グレネードが削除されるまでの時間
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
